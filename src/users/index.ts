@@ -7,36 +7,36 @@ import { buildFederatedSchema } from '@apollo/federation';
 const typeDefs = gql`
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
+  # This "User" type defines the queryable fields for every user in our data source.
+  type User {
+    name: String
+    lastName: String
   }
 
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
+  # case, the "users" query returns an array of zero or more Users (defined above).
   type Query {
-    books: [Book]
+    users: [User]
   }
 `;
-const books = [
+const users = [
     {
-        title: 'The Awakening',
-        author: 'Kate Chopin',
+        name: 'The Awakening',
+        lastName: 'Kate Chopin',
     },
     {
-        title: 'City of Glass',
-        author: 'Paul Auster',
+        name: 'City of Glass',
+        lastName: 'Paul Auster',
     },
 ];
 // Resolvers define the technique for fetching the types defined in the
-// schema. This resolver retrieves books from the "books" array above.
+// schema. This resolver retrieves users from the "users" array above.
 const resolvers = {
     Query: {
-        books: () => {
-            console.log(Date.now() + ' BOOKS!');
-            return books
+        users: () => {
+            console.log(Date.now() + ' USERS!');
+            return users
         },
     },
 };
@@ -46,7 +46,9 @@ const server = new ApolloServer({
     schema: buildFederatedSchema({ typeDefs, resolvers })
 });
 
+const PORT = process.env.PORT || 4000
+
 // The `listen` method launches a web server.
-server.listen(4001).then(({ url }) => {
+server.listen(PORT).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
 });

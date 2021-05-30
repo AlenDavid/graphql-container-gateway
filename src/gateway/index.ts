@@ -5,7 +5,7 @@ import { ApolloGateway } from '@apollo/gateway';
 // your subgraph names and URLs
 const gateway = new ApolloGateway({
     serviceList: [
-        { name: 'books', url: 'http://localhost:4001' },
+        { name: 'users', url: 'http://users:4000' },
         // Define additional services here
     ],
 });
