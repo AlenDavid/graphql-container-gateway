@@ -35,7 +35,7 @@ const books = [
 const resolvers = {
     Query: {
         books: () => {
-            console.log(Date.now() + 'BOOKS!');
+            console.log(Date.now() + ' BOOKS!');
             return books
         },
     },
